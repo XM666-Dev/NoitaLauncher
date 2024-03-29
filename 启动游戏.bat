@@ -1,6 +1,9 @@
 @echo off
-chcp 65001 >NUL
 setlocal EnableDelayedExpansion
+rem NoitaLauncher-Created by ImmotralDamned
+rem Github:
+rem Version 1.1
+chcp 65001 >NUL
 set config_path=config.txt
 if not exist !config_path! (
     for /f "tokens=1,2*" %%i in ('reg query HKEY_CURRENT_USER\Software\Valve\Steam /v SteamPath') do (
@@ -26,6 +29,7 @@ for /f "tokens=1,2*" %%i in ('fsutil reparsePoint query !link_from_path!') do (
     )
 )
 set current_path=!cd!
+md !link_to_path! 2>NUL
 cd /d !link_to_path!
 set absolute_link_to_path=!cd!
 if not !absolute_link_to_path!==!old_link_to_path! (
@@ -44,17 +48,24 @@ if not !absolute_link_to_path!==!old_link_to_path! (
     if exist !rename_to_directory! (
         set rename_to_directory=!rename_from_directory!!count!
         set /a count+=1
-        goto :loop
+        goto loop
     )
     ren !rename_path! !rename_to_directory! 2>NUL
     cd /d !current_path!
-    md !link_to_path! 2>NUL
     mklink /j !link_from_path! !link_to_path! >NUL
-    goto :launch
+    goto launch
 ) else (
     echo 游戏存档已联接！
 )
 :launch
+cd /d !current_path!
+for /d %%i in (!game_path!\mods\*) do (
+	if exist %%i\mod_id.txt (
+		for /f %%j in ('type %%i\mod_id.txt') do (
+			ren %%i %%j
+		)
+	)
+)
 cd /d !game_path!
 start noita.exe
 endlocal
