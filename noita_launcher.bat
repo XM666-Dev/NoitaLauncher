@@ -24,7 +24,7 @@ echo ;The save directory which will link to>>"%config_path%"
 echo ;要联接到的存档目录>>"%config_path%"
 echo save_path=%save_path%>>"%config_path%"
 
-call islinker "%USERPROFILE%\AppData\LocalLow\Nolla_Games_Noita" "%save_path%"
+call islinker.bat "%USERPROFILE%\AppData\LocalLow\Nolla_Games_Noita" "%save_path%"
 
 for /d %%i in ("%game_path%\mods\*") do (
 	for /f "usebackq" %%j in ("%%i\mod_id.txt") do (
@@ -33,6 +33,6 @@ for /d %%i in ("%game_path%\mods\*") do (
 )
 
 cd /d %game_path%
-start noita
+start noita.exe
 
 endlocal
