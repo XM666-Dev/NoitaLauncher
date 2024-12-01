@@ -6,4 +6,4 @@ Features:
 
 -Modify save path
 
--Boot you game
+-Boot the game
