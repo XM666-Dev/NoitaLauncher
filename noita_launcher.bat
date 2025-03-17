@@ -1,4 +1,4 @@
-setlocal
+setlocal enabledelayedexpansion
 
 rem NoitaLauncher - Version 1.1.3
 rem Created by ImmortalDamned
@@ -11,12 +11,12 @@ set config_filename=config.ini
 
 set game_directory=%game_directory_original%
 set save_directory=%save_directory_original%
-if not exist "%game_directory%\%exe_filename%" (
+if not exist "!game_directory!\%exe_filename%" (
 	set game_directory=
-	if not exist "%game_directory%\%exe_filename%" (
+	if not exist "!game_directory!\%exe_filename%" (
 		for /f "skip=1 tokens=2*" %%i in ('reg query HKEY_CURRENT_USER\Software\Valve\Steam /v SteamPath') do (
 			set game_directory=%%~fj\steamapps\common\%game_directory_original%
-			if not exist "%game_directory%\%exe_filename%" (
+			if not exist "!game_directory!\%exe_filename%" (
 				set game_directory=
 			)
 		)
@@ -43,6 +43,6 @@ for /d %%i in ("mods\*") do (
 	)
 )
 
-start "%exe_filename%"
+start "" "%exe_filename%"
 
 endlocal
