@@ -3,10 +3,10 @@ fsutil reparsepoint query %1
 if not errorlevel 1 (
     rd %1
 )
-:loop
+:next
 set /a i+=1
 if exist %1%i% (
-    goto loop
+    goto next
 )
 ren %1 %~n1%i%
 md %2
