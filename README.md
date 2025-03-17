@@ -1,4 +1,4 @@
-Game launcher for Noita.
+The game launcher for Noita.
 
 Features:
 
@@ -6,4 +6,4 @@ Features:
 
 -Modify save path
 
--Boot the game
+-Launch the game
