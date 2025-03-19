@@ -33,7 +33,8 @@ echo game_directory=!game_directory!>>"!config_filename!"
 echo ; The save directory for linking>>"!config_filename!"
 echo save_directory=!save_directory!>>"!config_filename!"
 
-call islinker.bat "%USERPROFILE%\AppData\LocalLow\!save_directory_original!" "!save_directory!"
+call islinker.bat "!save_directory!\data" "%LOCALAPPDATA%Low\!save_directory_original!\data"
+call islinker.bat "%LOCALAPPDATA%Low\!save_directory_original!" "!save_directory!"
 
 for /d %%i in ("!game_directory!\mods\*") do (
 	for /f "usebackq" %%j in ("%%i\mod_id.txt") do (

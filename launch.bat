@@ -1,0 +1,1 @@
+start /min noita_launcher.bat
