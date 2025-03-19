@@ -1,1 +1,1 @@
-start /min noita_launcher.bat
+start /min cmd /c noita_launcher.bat

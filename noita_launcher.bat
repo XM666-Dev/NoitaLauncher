@@ -1,4 +1,4 @@
-@(setlocal enabledelayedexpansion
+@>nul 2>&1(setlocal enabledelayedexpansion
 
 rem NoitaLauncher - Version 1.1.3
 rem Created by ImmortalDamned
@@ -33,7 +33,9 @@ echo game_directory=!game_directory!>>"!config_filename!"
 echo ; The save directory for linking>>"!config_filename!"
 echo save_directory=!save_directory!>>"!config_filename!"
 
-call islinker.bat "!save_directory!\data" "%LOCALAPPDATA%Low\!save_directory_original!\data"
+for /f "delims=: tokens=1*" %%i in ('fsutil reparsepoint query "%LOCALAPPDATA%Low\!save_directory_original!"') do for /f "tokens=*" %%j in ("%%j") do (
+	if "%%i"=="Print Name" if exist "%%j\data" if not exist "!save_directory!\data" call islinker.bat "!save_directory!\data" "%%j\data"
+)
 call islinker.bat "%LOCALAPPDATA%Low\!save_directory_original!" "!save_directory!"
 
 for /d %%i in ("!game_directory!\mods\*") do (
@@ -44,4 +46,4 @@ for /d %%i in ("!game_directory!\mods\*") do (
 
 start /d "!game_directory!" "" "!exe_filename!"
 
-endlocal)>nul 2>&1
+endlocal)
