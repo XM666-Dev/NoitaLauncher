@@ -34,9 +34,9 @@ echo ; The save directory for linking>>"!config_filename!"
 echo save_directory=!save_directory!>>"!config_filename!"
 
 for /f "delims=: tokens=1*" %%i in ('fsutil reparsepoint query "%LOCALAPPDATA%Low\!save_directory_original!"') do for /f "tokens=*" %%j in ("%%j") do (
-	if "%%i"=="Print Name" if exist "%%j\data" if not exist "!save_directory!\data" call islinker.bat "!save_directory!\data" "%%j\data"
+	if "%%i"=="Print Name" if exist "%%j\data" if not exist "!save_directory!\data" call smartlink.bat "!save_directory!\data" "%%j\data"
 )
-call islinker.bat "%LOCALAPPDATA%Low\!save_directory_original!" "!save_directory!"
+call smartlink.bat "%LOCALAPPDATA%Low\!save_directory_original!" "!save_directory!"
 
 for /d %%i in ("!game_directory!\mods\*") do (
 	for /f "usebackq" %%j in ("%%i\mod_id.txt") do (
